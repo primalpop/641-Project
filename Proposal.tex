@@ -45,13 +45,14 @@ The estimated cost of doing this project is 1796\$. Please see the attached Budg
 \pagebreak
 
 \section{Executive Summary}
-\centering{\textbf{Document Similarity using topic models and anchor words} \\ 
+\begin{center}
+\textbf{Document Similarity using topic models and anchor words} \\ 
 \vspace{0.2cm}
-\centering{Authors: Sunil Gandhi, University of Maryland, Baltimore County \\, Primal Pappachan, University of Maryland, Baltimore County \\ Ravendar Lal, University of Maryland, Baltimore County} \\
-\vspace{0.5cm}
-\textbf{27th February 2013}
-\centering{Keywords: Topic models,Latent Dirchlet Allocation,Non negative matrix factorization, Document Similarity}
- 
+Authors: Sunil Gandhi, University of Maryland, Baltimore County \\, Primal Pappachan, University of Maryland, Baltimore County \\ Ravendar Lal, University of Maryland, Baltimore County \\
+\textit{27th February 2013} \\
+Keywords: Topic models,Latent Dirchlet Allocation,Non negative matrix factorization, Document Similarity
+ \vspace{0.5cm}
+\end{center}
 
  Understanding topics related to a document is an important problem. It has its applications in advertising, search engines,etc. [1] paper suggest that understanding topics about a document can be formulated as problem of non negative matrix factorization. It proves that this problem is NP hard and suggests the use of anchor words to simplify the problem. It suggests NMF as replacement of LDA algorithm by making a claim that using anchor words is less stronger assumptions and this assumption holds in real life datasets. But, it doesn't give any empirical results proving these claims. We empirically evaluate these claims and check whether anchor words assumption hold on real life datasets. \\
 
@@ -67,7 +68,7 @@ The other applications where we can use topic models is during searching. For ex
 
 \section{Previous Work}
 
-The current approaches for learning Topic models use a Bayesian model based on the probability distribution of words inside a document. Specifically the models used for document representation are
+The current approaches for learning Topic models use a Bayesian model based on the probability distribution of words inside a document{\cite{blei}}. Specifically the models used for document representation are
 
 \begin{itemize} 
 \item Pure model - based on the assumption that a document belongs to a single topic
@@ -93,7 +94,7 @@ First of all, we will implement NMF method for topic extraction from documents w
 
 The results from the previous step will be compare against traditional approaches like LDA used for learning topic models for performance and accuracy and possibly validate author's claim of NMF being better than LDA for topic models. \\
 
-The NMF implementation will be put into use for measuring similarity between two documents. We will compare various distance measures for measuring similarity between probability distributions and after this step the relatively better measure would be chosen for our purpose.   
+The NMF implementation{\cite{nmf}} will be put into use for measuring similarity between two documents. We will compare various distance measures for measuring similarity between probability distributions and after this step the relatively better measure would be chosen for our purpose.   
 
 \section{Deliverables}
 \begin{enumerate}
@@ -136,6 +137,8 @@ EMNLP, 2008.
 \includegraphics[scale=0.75]{schedule.jpg}
 \end{figure}
 
+
+\pagebreak
 
 \section{Budget}
 \begin{figure}[h]
