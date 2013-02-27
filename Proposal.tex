@@ -76,7 +76,7 @@ The current approaches for learning Topic models use a Bayesian model based on t
 \item Latent Dirichlet Allocation(LDA)
 \item Corelated Topics model based on Pachinko Allocation
 \end{itemize}
-These models use algorithms which requires information about the maximum likelihood of observed data, can be hard to compute. Also the spectral methods, like computing the Singular Value Decomposition(SVD) of the document corpus for learning topic models can result in unnecessary computations(positive and negatives). Instead, in this paper authors propose usage of NMF for learning topic models. This method with the anchor word assumption can compute discover the hidden structure in document i.e learn topics in polynomial time. 
+These models use algorithms which requires information about the maximum likelihood of observed data, can be hard to compute. Also the spectral methods, like computing the Singular Value Decomposition(SVD) of the document corpus for learning topic models can result in unnecessary computations(positive and negatives). Instead, in this paper authors propose usage of NMF for learning topic models. They also suggest that if we assume existence of anchor words we can compute parameters of distribution of document in polynomial time. 
 
 
 \section{Specific Aims}
@@ -91,9 +91,9 @@ These models use algorithms which requires information about the maximum likelih
 
 \section{Plan}
 
-First of all, we will implement NMF method for topic extraction from documents without anchor words assumption. Afterwards, this will be evaluated against NMF with anchor words for performance. \\
+First of all, we will implement NMF method for topic extraction from documents and evaluate effect of anchor words on accuracy of finding similarity in documents.\\
 
-The results from the previous step will be compare against traditional approaches like LDA used for learning topic models for performance and accuracy and possibly validate author's claim of NMF being better than LDA for topic models. \\
+The results from the previous step will be compared against traditional approaches like LDA used for learning topic models for performance and accuracy and possibly validate author's claim of NMF being better than LDA for topic models. We will also check whether anchor words assumption holds on real life datasets.\\
 
 The NMF implementation{\cite{nmf}} will be put into use for measuring similarity between two documents. We will compare various distance measures for measuring similarity between probability distributions and after this step the relatively better measure would be chosen for our purpose.   
 
@@ -103,16 +103,16 @@ The NMF implementation{\cite{nmf}} will be put into use for measuring similarity
 \begin{itemize}
 \item Detailed analysis of various algorithms for Learning Topic models
 \item Detailed analysis of various distance measures for comparison of two documents
-\item Results of experiments and comaparison against traditional approaches
+\item Results of experiments and comparison against traditional approaches
 \end{itemize}
-\item Presentation explaining various aspects of the project and how we went about acheiving the aims of Project
+\item Presentation explaining various aspects of the project and how we went about achieving the aims of Project
 \item Source code of algorithms used in the project
 \end{enumerate}
 
 \section{Issues}
-Finding out anchor words and whether anchor words assumption on real life will be non trivial task. We plan to implement NMF for topic model and will imperically check for existance of anchor words. \\
+Finding out anchor words and whether anchor words assumption on real life will be non trivial task. We plan to implement NMF for topic model and will empirically check for existence of anchor words. \\
 
-Depending on nature of distribution of topics for a document we will have to find the distance measure which works best for this distribution. We plan to impirically evaluate quality of results from differrent distance measures and understand which distance works best for topic models.
+Depending on nature of distribution of topics for a document we will have to find the distance measure which works best for this distribution. We plan to empirically evaluate quality of results from different distance measures and understand which distance works best for topic models.
 
 
 \begin{thebibliography}{99}
