@@ -1,0 +1,29 @@
+cryptology
+Plan
+
+(b) Executive Summary (one page)
+The executive summary is like an abstract; it is a substitute for the entire proposal. Repeat the title, date,
+author names and affiliations, and project keywords on the executive summary page
+
+
+(c) Motivation
+What are you doing and why? Why is your work significant, both within your field, and to society at
+large? What is challenging about your proposed work?
+
+A huge number of documents are generated daily in form of journals, papers from conferences and  news paper articles. A large amount of unstructured data is already present on web in form of wikipedia, web pages and social network sites. A user usually cannot read all the data availaible to him. Also, reading through data to find out more about document is not a very feasible option considering the number of documents availaible. I these cases it is important to understand the document and suggest users for relevant documents on certain topics or it would benifit if suggest the documents related to one that he is actually using. We think that topic models can be helpfull in performing such tasks. 
+The other applications where we can use topic models is during searching. For example, topic models are ideal for searchinng on social media sites like quora. On quora there are large number of question and answer and it would be good if user could search through topics and find question and answers which are related to his topic of interest. Also, Finding advertisements which are related to query that user just searched and is probably interested in is an interesting problem whose roots lie in topic models. So, topic models have their application in various filds like advertisement, searching, recommendation engine, etc.
+[1] suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices.It also suggests use of anchor words to make this problem tractable. But, no impirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theorotically, suggest that NMF is better than LDA and it makes less severe assumption of seperability. We will experimentally verify this claim and check for severity of "seperability" assumption on real life dataset. We would also compare two documents based on there distribution over topic models. For this comparison, we can try differrent distance measures and understand which distance measure works best with topic models. This problem is significant because, understanding distance measures can be helpfull in all types of machine learning problems like clustering, classification,etc. It will also be usefull in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]
+
+Issues
+What difficulties do you foresee, and how do you plan to overcome them?
+Finding out anchor words and whether anchor words assumption on real life will be non trivial task. We plan to implement NMF for topic model and will imperically check for existance of anchor words.
+Depending on nature of distribution of topics for a document we will have to find the distance measure which works best for this distribution. We plan to impirically evaluate quality of results from differrent distance measures and understand which distance works best for topic models.
+
+Biographical sketch:
+Sunil Gandhi, Masters Student, University of maryland baltimore county.
+
+References :-
+
+[2]Dredze, Mark and Crammer, Koby. Online meth-
+ods for multi-domain learning and adaptation. In
+EMNLP, 2008.
