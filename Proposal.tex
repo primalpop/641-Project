@@ -3,6 +3,7 @@
 \usepackage[big]{layaureo} 				%better formatting of the A4 page
 
 \usepackage{graphics}
+\usepackage{graphicx}
 
 %Setup hyperref package, and colours for links
 \usepackage{hyperref}
@@ -13,7 +14,7 @@
 
 \title{Topic Extraction and analysing Document Similarity}
 \author{Primal Pappachan, Sunil Gandhi, Ravendar Lal \\ 
-\texttt{primal1@umbc.edu, Add your ids}}
+\texttt{primal1@umbc.edu, sunilga1@umbc.edu, rlal1@umbc.edu}}
 \date{\today}
 \maketitle
 
@@ -22,25 +23,24 @@
 \section{Project Summary}
 \subsection{Description}
 Measuring the similarity between two documents based on topic models built using Non-negative Matrix Factorization 
-\subsection{}Keywords
+\subsection{Keywords}
 Topic models, SVD, LDA, NMF, Document Similarity 
 \subsection{Focus}
 How does Non-negative Factorization(NMF) fare against Latent Dirichlet Allocation(LDA) for discovering topic models from a document? Can these topic models be used to analyse the similarity between a pair documents based on distance measures like KL and L-inf?
 \subsection{Responsibilities}
 \begin{itemize}
-\item Primal Pappachan
-\item Sunil
-\item Ravendar
+\item Primal Pappachan: Implementing Non-negative Matrix Factorization and comparing it against LDA
+\item Sunil Gandhi: Implementing Non-negative Matrix Factorization and using it to analyse similarity between two documents 
+\item Ravendar Lal: Collecting data and evaluating various distance measurements
 \end{itemize}
-
-
 \subsection{Total Budget} 
-
+The estimated cost of doing this project is 1796\$. Please see the attached Budget section for detailed information.
 \subsection{Deliverables}
-
 %List of deliverables
 \begin{itemize}
-\item Output
+\item Project Report
+\item Presentation slides
+\item Source code
 \end{itemize}
 
 
@@ -49,6 +49,12 @@ How does Non-negative Factorization(NMF) fare against Latent Dirichlet Allocatio
 
 \section{Motivation}
 
+
+A huge number of documents are generated daily in form of journals, papers from conferences and  news paper articles. A large amount of unstructured data is already present on web in form of wikipedia, web pages and social network sites. A user usually cannot read all the data availaible to him. Also, reading through data to find out more about document is not a very feasible option considering the number of documents availaible. I these cases it is important to understand the document and suggest users for relevant documents on certain topics or it would benifit if suggest the documents related to one that he is actually using. We think that topic models can be helpfull in performing such tasks. \\
+
+The other applications where we can use topic models is during searching. For example, topic models are ideal for searchinng on social media sites like quora. On quora there are large number of question and answer and it would be good if user could search through topics and find question and answers which are related to his topic of interest. Also, Finding advertisements which are related to query that user just searched and is probably interested in is an interesting problem whose roots lie in topic models. So, topic models have their application in various filds like advertisement, searching, recommendation engine, etc. \\
+
+[1] suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices.It also suggests use of anchor words to make this problem tractable. But, no impirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theorotically, suggest that NMF is better than LDA and it makes less severe assumption of seperability. We will experimentally verify this claim and check for severity of "seperability" assumption on real life dataset. We would also compare two documents based on there distribution over topic models. For this comparison, we can try differrent distance measures and understand which distance measure works best with topic models. This problem is significant because, understanding distance measures can be helpfull in all types of machine learning problems like clustering, classification,etc. It will also be usefull in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]
 
 \section{Previous Work}
 
@@ -63,7 +69,6 @@ These models use algorithms which requires information about the maximum likelih
 
 
 \section{Specific Aims}
-
 \begin{enumerate}
 \item Understanding Topic models and Non-negative Matrix Factorization method
 \item Implementation of NMF for topic extraction from documents
@@ -75,52 +80,54 @@ These models use algorithms which requires information about the maximum likelih
 
 \section{Plan}
 
-First of all, we will implement NMF method for topic extraction from documents without anchor words assumption. Afterwards, this will be evaluated against NMF with anchor words for performance. 
+First of all, we will implement NMF method for topic extraction from documents without anchor words assumption. Afterwards, this will be evaluated against NMF with anchor words for performance. \\
 
-The results from the previous step will be compare against traditional approaches like LDA used for learning topic models for performance and accuracy and possibly validate author's claim of NMF being better than LDA for topic models.
+The results from the previous step will be compare against traditional approaches like LDA used for learning topic models for performance and accuracy and possibly validate author's claim of NMF being better than LDA for topic models. \\
 
 The NMF implementation will be put into use for measuring similarity between two documents. We will compare various distance measures for measuring similarity between probability distributions and after this step the relatively better measure would be chosen for our purpose.   
 
 \section{Deliverables}
-
-
-\section{Issues}
-What difficulties do you foresee, and how do you plan to overcome them?
-
-\section{Bibliography}
-\begin{thebibliography}{99}
-\bibitem{tecs} \textit{The elements of Computing Systems}, Noam Nisan and Shimon Shocken, MIT Press
-\bibitem{python} \textit{Dive into Python} - Mark Pilgrim.
-\end{thebibliography}
-
-
 \begin{itemize}
 \item
 \item
-\end{itemize}  
+\item
+\end{itemize}
+
+\section{Issues}
+Finding out anchor words and whether anchor words assumption on real life will be non trivial task. We plan to implement NMF for topic model and will imperically check for existance of anchor words. \\
+
+Depending on nature of distribution of topics for a document we will have to find the distance measure which works best for this distribution. We plan to impirically evaluate quality of results from differrent distance measures and understand which distance works best for topic models.
+
+
+\begin{thebibliography}{99}
+\bibitem{} \textit{The elements of Computing Systems}, Noam Nisan and Shimon Shocken, MIT Press
+\bibitem{python} \textit{Dive into Python} - Mark Pilgrim.
+\bibitem{blei} \textit{Review article on Probabilistic topic models}, David m. Blei  
+\end{thebibliography}
 
 \section{Biographical sketches of the investigators}
 
 \begin{itemize}
 \item Primal Pappachan, Master's Student in Computer Science, Research Assistant in Ebiquity Research group
-\item Sunil Gandhi, Masters Student in Computer Science
+\item Sunil Gandhi, Masters Student in Computer Science, Research Assistant in CoraL lab
+\item Ravendar Lal, Master's Student in Computer Science, Research Assistant in Ebiquity Research group
 \end{itemize}
 
 
 \section{Schedule}
+\begin{figure}[h]
+\includegraphics[scale=0.75]{schedule.jpg}
+\end{figure}
 
-Timeline
 
 \section{Budget}
+\begin{figure}[h]
+\includegraphics[scale=0.7]{Budget.jpg}
+\end{figure}
 
-What resources (including your own time) do you need to complete the project? Be sure to include
-required wages, equipment, travel. Using a spreadsheet (e.g., Excel), summarize in one simple page your
-direct, indirect, and total costs. As your indirect costs, include a 47\% overhead for UMBC on all direct
-costs. (Indirect cost is UMBC’s overhead. Direct costs are everything else, including UMBC’s 33\% of
-any salary for benefits.)
 
 
 \section{Appendix A: Research Conference}
-Attach a copy of the paper from a recent algorithms research conference on which your work is based.
+The copy of the paper, 'Learning from Topic models - Going beyond SVD' by Sanjeev Arora, Rong Ge, Ankur Moitra from 53rd Annual IEEE Symposium on Foundations of Computer Science (FOCS 2012) research conference is attached.
 
 \end{document}
