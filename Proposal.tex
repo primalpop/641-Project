@@ -29,7 +29,7 @@ Topic models, SVD, LDA, NMF, Document Similarity
 How does Non-negative Factorization(NMF) fare against Latent Dirichlet Allocation(LDA) for discovering topic models from a document? Can these topic models be used to analyse the similarity between a pair documents based on distance measures like KL and L-inf?
 \subsection{Responsibilities}
 \begin{itemize}
-\item Primal Pappachan: Implementing Non-negative Matrix Factorization and comparing it against LDA
+\item Primal Pappachan: Implementing Non-negative Matrix Factorization and comparing it against Latent Dirichlet Allocation for topic extraction
 \item Sunil Gandhi: Implementing Non-negative Matrix Factorization and using it to analyse similarity between two documents 
 \item Ravendar Lal: Collecting data and evaluating various distance measurements
 \end{itemize}
@@ -87,11 +87,17 @@ The results from the previous step will be compare against traditional approache
 The NMF implementation will be put into use for measuring similarity between two documents. We will compare various distance measures for measuring similarity between probability distributions and after this step the relatively better measure would be chosen for our purpose.   
 
 \section{Deliverables}
+\begin{enumerate}
+\item Project Report
 \begin{itemize}
-\item
-\item
-\item
+\item Detailed analysis of various algorithms for Learning Topic models
+\item Detailed analysis of various distance measures for comparison of two documents
+\item Results of experiments and comaparison against traditional approaches
 \end{itemize}
+\item Presentation explaining various aspects of the project and how we went about acheiving the aims of Project
+\item Source code of algorithms used in the project
+\end{enumerate}
+
 
 \section{Issues}
 Finding out anchor words and whether anchor words assumption on real life will be non trivial task. We plan to implement NMF for topic model and will imperically check for existance of anchor words. \\
