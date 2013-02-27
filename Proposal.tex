@@ -11,7 +11,7 @@
 
 %--------------------TITLE-------------
 
-\title{Super Title}
+\title{Topic Extraction and analysing Document Similarity}
 \author{Primal Pappachan, Sunil Gandhi, Ravendar Lal \\ 
 \texttt{primal1@umbc.edu, Add your ids}}
 \date{\today}
@@ -20,14 +20,19 @@
 %--------------------SECTIONS----------------------------------
 
 \section{Project Summary}
+\subsection{Description}
+Measuring the similarity between two documents based on topic models built using Non-negative Matrix Factorization 
+\subsection{}Keywords
+Topic models, SVD, LDA, NMF, Document Similarity 
+\subsection{Focus}
+How does Non-negative Factorization(NMF) fare against Latent Dirichlet Allocation(LDA) for discovering topic models from a document? Can these topic models be used to analyse the similarity between a pair documents based on distance measures like KL and L-inf?
+\subsection{Responsibilities}
+\item Primal Pappachan
+\item Sunil
+\item Ravendar
+\subsection{Total Budget} 
 
-title \\
-Short phrase describing the general area within cryptology of your project. \\
-Keywords \\
-Brief 1-3 sentence project description. Distill your proposal to one focused, well-defined question. \\
-Assignment of responsibilities \\
-Total Budget \\
-
+\subsection{Deliverables}
 
 %List of deliverables
 \begin{itemize}
@@ -37,41 +42,45 @@ Total Budget \\
 
 \section{Executive Summary}
 
-Abstract \\
-
-Repeat the title, date,
-author names and affiliations, and project keywords on the executive summary page
-
 
 \section{Motivation}
 
 
-What are you doing and why? Why is your work significant, both within your field, and to society at
-large? What is challenging about your proposed work?
-
-
 \section{Previous Work}
 
-Identify and critically comment on selected relevant previous work. How is your project different and
-better than this previous work? Do not simply list previous work.
+The current approaches for learning Topic models use a Bayesian model based on the probability distribution of words inside a document. Specifically the models used for document representation are
+
+\begin{itemize} 
+\item Pure model - based on the assumption that a document belongs to a single topic
+\item Latent Dirichlet Allocation(LDA)
+\item Corelated Topics model based on Pachinko Allocation
+\end{itemize}
+
+These models use algorithms which requires information about the maximum likelihood of observed data, can be hard to compute. Also the spectral methods, like computing the Singular Value Decomposition(SVD) of the document corpus for learning topic models can result in unnecessary computations(##positive and negatives). Instead, in this paper authors propose usage of NMF for learning topic models. This method with the anchor word assumption can compute discover the hidden structure in document i.e learn topics in polynomial time. 
 
 
 \section{Specific Aims}
 
 \begin{enumerate}
-\item Problem 1
-\item Problem 2
-
+\item Understanding Topic models and Non-negative Matrix Factorization method
+\item Implementation of NMF for topic extraction from documents
+\item Comparing NMF results with Latent Dirichlet Allocation (LDA) approach
+\item Experimenting with various Distance measures to find similarity between the documents
+\item Using the distance measure chosen from previous step to compute similarity between documents
 \end{enumerate}
 
 
 \section{Plan}
-Plans to complete the project 
+
+First of all, we will implement NMF method for topic extraction from documents without anchor words assumption. Afterwards, this will be evaluated against NMF with anchor words for performance. 
+
+The results from the previous step will be compare against traditional approaches like LDA used for learning topic models for performance and accuracy and possibly validate author's claim of NMF being better than LDA for topic models.
+
+The NMF implementation will be put into use for measuring similarity between two documents. We will compare various distance measures for measuring similarity between probability distributions and after this step the relatively better measure would be chosen for our purpose.   
 
 \section{Deliverables}
 
 E.g., project report, PowerPoint slides, presentation, source code.
-
 
 \section{Issues}
 What difficulties do you foresee, and how do you plan to overcome them?
