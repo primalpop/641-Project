@@ -26,10 +26,11 @@ Measuring the similarity between two documents based on topic models built using
 \subsection{Keywords}
 Topic models,Latent Dirchlet Allocation,Non negative matrix factorization, Document Similarity 
 \subsection{Focus}
-How does Non-negative Factorization(NMF) fare against Latent Dirichlet Allocation(LDA) for discovering topic models from a document? Can these topic models be used to analyse the similarity between a pair documents based on distance measures like KL and L-inf?
+How does Non-negative Factorization(NMF) factorization perform against Latent Dirichlet Allocation(LDA) for discovering topic models from a document? Can these topic models be used to analyse the similarity between a pair documents based on distance measures? Can accuracy of this semantic distance be improved using anchor words?
+
 \subsection{Responsibilities}
 \begin{itemize}
-\item Primal Pappachan: Implementing Non-negative Matrix Factorization and comparing it against Latent Dirichlet Allocation for topic extraction
+\item Primal Pappachan: Implementing Non-negative Matrix Factorization and comparing it against LDA
 \item Sunil Gandhi: Implementing Non-negative Matrix Factorization and using it to analyse similarity between two documents 
 \item Ravendar Lal: Collecting data and evaluating various distance measurements
 \end{itemize}
@@ -60,11 +61,11 @@ Most document classification algorithms require us to calculate distance between
 
 \pagebreak
 \section{Motivation}
-A huge number of documents are generated daily in form of journals, papers from conferences and  news paper articles. A large amount of unstructured data is already present on web in form of wikipedia, web pages and social network sites. A user usually cannot read all the data availaible to him. Also, reading through data to find out more about document is not a very feasible option considering the number of documents availaible. I these cases it is important to understand the document and suggest users for relevant documents on certain topics or it would benifit if suggest the documents related to one that he is actually using. We think that topic models can be helpfull in performing such tasks. \\
+A huge number of documents are generated daily in form of journals, papers from conferences and  news paper articles. A large amount of unstructured data is already present on web in form of wikipedia, web pages and social network sites. A user usually cannot read all the data available to him. Also, reading through data to find out more about document is not a very feasible option considering the number of documents available. I these cases it is important to understand the document and suggest users for relevant documents on certain topics or it would benefit if suggest the documents related to one that he is actually using. We think that topic models can be helpful in performing such tasks. \\
 
-The other applications where we can use topic models is during searching. For example, topic models are ideal for searchinng on social media sites like quora. On quora there are large number of question and answer and it would be good if user could search through topics and find question and answers which are related to his topic of interest. Also, Finding advertisements which are related to query that user just searched and is probably interested in is an interesting problem whose roots lie in topic models. So, topic models have their application in various filds like advertisement, searching, recommendation engine, etc. \\
+The other applications where we can use topic models is during searching. For example, topic models are ideal for searching on social media sites like quora. On quora there are large number of question and answer and it would be good if user could search through topics and find question and answers which are related to his topic of interest. Also, Finding advertisements which are related to query that user just searched and is probably interested in is an interesting problem whose roots lie in topic models. So, topic models have their application in various fields like advertisement, searching, recommendation engine, etc. \\
 
-[1] suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices.It also suggests use of anchor words to make this problem tractable. But, no impirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theorotically, suggest that NMF is better than LDA and it makes less severe assumption of seperability. We will experimentally verify this claim and check for severity of "seperability" assumption on real life dataset. We would also compare two documents based on there distribution over topic models. For this comparison, we can try differrent distance measures and understand which distance measure works best with topic models. This problem is significant because, understanding distance measures can be helpfull in all types of machine learning problems like clustering, classification,etc. It will also be usefull in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]
+[1] suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices.It also suggests use of anchor words to make this problem tractable. But, no empirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theoretically, suggest that NMF is better than LDA and it makes less severe assumption of separability. We will experimentally verify this claim and check for severity of "separability" assumption on real life dataset. We would also compare two documents based on there distribution over topic models. For this comparison, we can try different distance measures and understand which distance measure works best with topic models. This problem is significant because, understanding distance measures can be helpful in all types of machine learning problems like clustering, classification,etc. It will also be useful in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]
 
 \section{Previous Work}
 
@@ -97,17 +98,11 @@ The results from the previous step will be compare against traditional approache
 The NMF implementation{\cite{nmf}} will be put into use for measuring similarity between two documents. We will compare various distance measures for measuring similarity between probability distributions and after this step the relatively better measure would be chosen for our purpose.   
 
 \section{Deliverables}
-\begin{enumerate}
-\item Project Report
 \begin{itemize}
-\item Detailed analysis of various algorithms for Learning Topic models
-\item Detailed analysis of various distance measures for comparison of two documents
-\item Results of experiments and comaparison against traditional approaches
+\item
+\item
+\item
 \end{itemize}
-\item Presentation explaining various aspects of the project and how we went about acheiving the aims of Project
-\item Source code of algorithms used in the project
-\end{enumerate}
-
 
 \section{Issues}
 Finding out anchor words and whether anchor words assumption on real life will be non trivial task. We plan to implement NMF for topic model and will imperically check for existance of anchor words. \\
