@@ -1,0 +1,114 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[big]{layaureo} 				%better formatting of the A4 page
+
+\usepackage{graphics}
+\usepackage{graphicx}
+
+%Setup hyperref package, and colours for links
+\usepackage{hyperref}
+
+\begin{document}
+
+%--------------------TITLE-------------
+
+\title{Document Similarity using topic models and anchor words}
+\author{Primal Pappachan, Sunil Gandhi, Ravendar Lal \\ 
+\texttt{primal1@umbc.edu, sunilga1@umbc.edu, rlal1@umbc.edu}}
+\date{\today}
+\maketitle
+
+%--------------------SECTIONS----------------------------------
+
+
+\section{Progress Report}
+Following is our progress report on the project
+\subsection{Progress so far}
+
+\begin{enumerate}
+\item As per suggested in proposal, we talked to Dr. Oates on various aspects of this paper and he found our idea of approaching the problem quite convincing. He also suggested couple of datasets for this task that we are evaluating.
+
+\item Since this paper is quite detailed, we have tried to fully understand the paper. We also came across a paper by same authors in which they have showed progress in their work since their first paper that we reviewed initially was not implemented. 
+
+\item Dataset: We have evaluated various datasets. Following is the list of datasets that we have evaluated:
+
+\begin{itemize}
+\item New York Times Dataset
+\item AP Press Dataset
+\item NIPS Dataset
+\end{itemize}
+
+\end{enumerate}
+
+
+\subsection{Remaining Work}
+\begin{enumerate}
+\item Coding Non-negative Matrix Factorization (NMF): We have yet to implement NMF Alogirthm. We have found couple of helpful libraries and we have hacked them on how to use those. We will be spending 
+\item Coding LDA: Implementing LDA is critical part of this project. We will be implementing this algorithm to compare with NMF algorithm. 
+
+\end{enumerate}
+
+
+\subsection{Problems being faced}
+\begin{enumerate}
+\item Anchor words: It is not easy to identify anchor words from every article since sometimes one article may have one or various anchor words and the dataset that we are using may have various kinds of anchor words. So putting this concept of anchor words in real life will be quite tough since dataset is not defined for this purpose.
+
+\end{enumerate}
+
+
+\subsection{Schedule}
+Following our schedule to tackle remaining tasks. 
+\begin{table}
+\centering
+\begin{tabular}{l|r}
+Task & Date\\\hline
+Pasring Dataset & 3/30 \\
+Implementing LDA & 4/2 \\
+Implementing NMF & 4/8 \\
+Result Comparison and Experimentation & 4/15 \\
+Final Report and Presentation & 4/17
+\end{tabular}
+\caption{\label{tab:widgets}Schedule.}
+\end{table}
+
+\pagebreak
+
+\section{Introduction}
+A huge number of documents are generated daily in form of journals, papers from conferences and  news paper articles. A large amount of unstructured data is already present on web in form of wikipedia, web pages and social network sites. A user usually cannot read all the data available to him. Also, reading through data to find out more about document is not a very feasible option considering the number of documents available. I these cases it is important to understand the document and suggest users for relevant documents on certain topics or it would benefit if suggest the documents related to one that he is actually using. We think that topic models can be helpful in performing such tasks. \\
+
+The other applications where we can use topic models is during searching. For example, topic models are ideal for searching on social media sites like quora. On quora there are large number of question and answer and it would be good if user could search through topics and find question and answers which are related to his topic of interest. Also, Finding advertisements which are related to query that user just searched and is probably interested in is an interesting problem whose roots lie in topic models. So, topic models have their application in various fields like advertisement, searching, recommendation engine, etc. \\
+
+[1] suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices.It also suggests use of anchor words to make this problem tractable. But, no empirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theoretically, suggest that NMF is better than LDA and it makes less severe assumption of separability. We will experimentally verify this claim and check for severity of "separability" assumption on real life dataset. We would also compare two documents based on there distribution over topic models. For this comparison, we can try different distance measures and understand which distance measure works best with topic models. This problem is significant because, understanding distance measures can be helpful in all types of machine learning problems like clustering, classification,etc. It will also be useful in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]
+
+\section{Previous Work}
+
+The current approaches for learning Topic models use a Bayesian model based on the probability distribution of words inside a document{\cite{blei}}. Specifically the models used for document representation are
+
+\begin{itemize} 
+\item Pure model - based on the assumption that a document belongs to a single topic
+\item Latent Dirichlet Allocation(LDA)
+\item Corelated Topics model based on Pachinko Allocation
+\end{itemize}
+These models use algorithms which requires information about the maximum likelihood of observed data, can be hard to compute. Also the spectral methods, like computing the Singular Value Decomposition(SVD) of the document corpus for learning topic models can result in unnecessary computations(positive and negatives). Instead, in this paper authors propose usage of NMF for learning topic models. They also suggest that if we assume existence of anchor words we can compute parameters of distribution of document in polynomial time. 
+
+\section{Methods}
+We will be implementing LDA and NMF models usiing anchor words assumption. We will be comparing results of both algorithms and try to evaluate which one words the best. In this way, we will be in position to comment on the work mentioned in this paper. 
+
+So our main method of evaluation would be comparison of two algorithms. 
+
+
+\begin{thebibliography}{99}
+\bibitem{tm} \textit{Learning Topic Models---Going beyond SVD}. Arora, Saneev, Rong Ge, and Ankur Moitra. In FOCS 2012.
+\bibitem{dred} \textit{Online methods for multi-domain learning and adaptation}. Dredze, Mark and Crammer, Koby. In
+EMNLP, 2008.
+\bibitem{nmf} \textit{Computing a nonnegative matrix factorization--provably}. Sanjeev Arora, Rong Ge, Ravi Kannan, Ankur Moitra. Proceedings of the 44th symposium on Theory of Computing. ACM, 2012.  
+\bibitem{blei} \textit{Review article on Probabilistic topic models}. David m. Blei  
+\end{thebibliography}
+
+
+
+
+\pagebreak
+
+
+\end{document}
