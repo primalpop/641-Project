@@ -4,3 +4,7 @@
 *.aux
 *.out
 *.synctex.gz
+*.o
+*.beta
+*.gamma
+*.other
