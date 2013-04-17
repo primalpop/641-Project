@@ -1,0 +1,9 @@
+Previous Work
+
+The goal of topic modeling problem is to recover the model parameters in polynomial time, assuming
+the data was generated perfectly from the hypothesized model using an unknown set of parameters. The approach presented by Arora et. al provably recovers the model parameters based on the seperability assumptions. 
+
+Sampling-based algorithms and variational algorithms are the two classes of topic modelling algorithms. The former includes Gibbs sampling, where we construct a sequence of random variables, each dependent on the previous one. Variational algorithms approach it from an optimization perspective by using probabilistic modelling.[David Blei Topic Modelling tutorial] Latent Dirichlet Allocation(LDA) falls under this category which assumes that priors that have the form of the Dirichlet distribution. 
+
+A similar approach is used by Anandkumar et al. [2012] which does not require not require separability assumptions and like LDA assumes that topics are not correlated. These models therefore fail in capturing correlations between topics. Pachinko Allocation Model(PAM) captures the concepts of topics as distribution over words as well as the correlation between topics but the topics and their relations have to be manually selected.[Nonparametric Bayes Pachinko Allocation by Li, Blei and McCallum (UAI 2007)] 
+
