@@ -76,14 +76,6 @@ The high level sketch of algorithm as proposed by \cite{tm} is given in \ref{fig
 \label{fig:algorithm}
 \end{figure}
 
-
-\begin{itemize} 
-\item Pure model - based on the assumption that a document belongs to a single topic
-\item Latent Dirichlet Allocation(LDA)
-\item Corelated Topics model based on Pachinko Allocation
-\end{itemize} 
-These models use algorithms which requires information about the maximum likelihood of observed data, can be hard to compute. Also the spectral methods, like computing the Singular Value Decomposition(SVD) of the document corpus for learning topic models can result in unnecessary computations(positive and negatives). Instead, in this paper authors propose usage of NMF for learning topic models. They also suggest that if we assume existence of anchor words we can compute parameters of distribution of document in polynomial time. 
-
 \section{Dataset}
 Dataset: We have evaluated various datasets. Following is the list of datasets that we considered:
 
@@ -147,10 +139,6 @@ EMNLP, 2008.
 
 
 \end{thebibliography}
-
-
-
-
 
 \pagebreak
 
