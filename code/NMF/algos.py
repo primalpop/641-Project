@@ -2,9 +2,13 @@ import re
 import numpy as np
 import scipy.sparse as csr
 import math
+from sklearn import random_projection
 
 filename = "ap/ap.dat"
 numWords = 10473
+#lowerDimensions = log 40173 * 4 /(0.2*0.2)
+lowerDimensions = 500
+K= 10
 Hbar = []
 Hcap = [0]*numWords
 
@@ -34,3 +38,12 @@ row_sums = np.array(Q.sum(axis=1))[:,0]
 row_indices, col_indices = Q.nonzero()
 Q.data /= row_sums[row_indices]
 #Q is normalized from this point
+
+
+#Fast anchor words
+transformer = random_projection.SparseRandomProjection(lowerDimensions)
+D = transformer.fit_transform(Q)
+
+
+
+	
