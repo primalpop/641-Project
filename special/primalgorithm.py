@@ -72,12 +72,13 @@ def prim(V, A, r):
 timings = []
 for i in range(5, 1000, 5):
     start = time.time()
-    A = gen.topology(i)        
+    A = gen.topology(i,0.4)        
     V = range(i)
     P = prim(V, A, 0)
     end = time.time()
     t = end - start
     timings.append(t)
+    print time
     #print P
 
 print timings    
