@@ -85,15 +85,23 @@ Dataset: We have evaluated various datasets. Following is the list of datasets t
 \item NIPS Dataset
 \end{itemize}
 
-After evaluation, we chose AP Press Dataset for our experiments. New York Times dataset is hard to get hold off since it is not available for free. 
-
+After evaluation, we chose AP Press Dataset for our experiments. New York Times dataset is hard to get hold off since it is not available for free.
 
 \section{Methods}
 We evaluated number of approaches to find the distance similarity between two documents. We have mainly focused on the approaches mentioned in paper [1] and tried to implement what they have mentioned. This concept of anchor words, words that helps to decide the topic of a document, is very promising. Though it comes with different inherit problems like it is not easy to find anchor words for every document and sometimes having more documents make it more complex to find anchor words as it might overlap with other documents as well. Despite all this, Anchor words helps to differentiate one document from other contextually. In following methods we will see how to find anchor words along and how to use them to find the similarity among documents. \\
 
+\subsection{Calculating word word co variance matrix}
+
+Word Word covariance matrix as we get very noisy version of data and it has property that  $\hat{M} \hat{M}^T -> M M^T $ and $W W^T -> R$ as number of documents increases. For computation of this matrix we counted number of times each word appears in certain document and formed a document word matrix. We represented this matrix $\bar{Hd}$ as sparse as it had very few number of non zero entries. We normalised all the entries by dividing each count by sqrt(n*n-1) where n is total number of words in that document. We also computed $\hat{H}$ which is diagonal matrix which contains elements total count divided by (n*n-1). Then word word covariance matrix Q is given by equation (1).
+
+\begin{equation}
+Q = \bar{H} \bar{H}^T - \hat{H}
+\end{equation}
+The size of this matrix is very large of order of square of size of dictionary. Even though matrix is sparse it will take a huge amount of space. We solve this problem using random projection of matrices. Random projection is based on Johnson-Lindenstrauss lemma which is "If points in a vector space are projected onto a randomly selected subspace of suitably high dimension, then the distances between the points are approximately preserved." as stated in \cite{Random projection} Random projection reduces size of matrix considerably by projecting it to lower dimension, but keeps the distances between two points approximately same as it was in higher dimension.
+
 
 \subsection{Recovering Word Topic Matrix}
-The algorithm we have implemented is based on a probabilistic approach where we find the conditional probabilities of words given topics using Bayes theorem. For this purpose we use the row-normalized word co-occurence matrix $\bar{Q}$ which gives the conditional probability among pairs of words. So given $\hat{Q_{i}}$, which is a row of the empirical row normalized co-occurrence matrix we wish to find out the $p(\frac{z_{1}}{w_{1}=i}$ which can best recover the rows as a convex combination of the anchor words. This step can be done in parallel using exponeniated gradient algorithm. The word topic matrix can be recovered once we have $p(\frac{z_{1}}{w_{1}}$ using Baye's rule. 
+The algorithm we have implemented is based on a probabilistic approach where we find the conditional probabilities of words given topics using Bayes theorem. For this purpose we use the row-normalized word co-occurrence matrix $\bar{Q}$ which gives the conditional probability among pairs of words. So given $\hat{Q_{i}}$, which is a row of the empirical row normalized co-occurrence matrix we wish to find out the $p(\frac{z_{1}}{w_{1}=i}$ which can best recover the rows as a convex combination of the anchor words. This step can be done in parallel using exponeniated gradient algorithm. The word topic matrix can be recovered once we have $p(\frac{z_{1}}{w_{1}}$ using Baye's rule. 
 
 \subsection{Document Similarity Using Topic Models}
 We are implementing distance matrix algorithm to find out the similarity between two documents. This distance basically tells us how similar or dissimilar two documents are. We are using our topic model algorithm in this. Basically, after getting the scores of all the topics in each of the documents, We evaluate the euclidean distance between two topics in each of these two document. And the Highest score among topics will tell which topic best describes the relationship among two documents. We have not fully implemented this yet but we are in good position to complete this very soon and add the results in final report. Figure 1 demonstrate one example where two differentdocuments in sports category are considered for topics Football, Baseball and Basketball. 
