@@ -1,4 +1,5 @@
 import gen
+import time
 
 #A = adjacency matrix, u = vertex u, v = vertex v
 def weight(A, u, v):
@@ -68,9 +69,15 @@ def prim(V, A, r):
 
 #V = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
+timings = []
+for i in range(5, 1000, 5):
+    start = time.time()
+    A = gen.topology(i)        
+    V = range(i)
+    P = prim(V, A, 0)
+    end = time.time()
+    t = end - start
+    timings.append(t)
+    #print P
 
-
-A = gen.topology(5)        
-V = range(5)
-P = prim(V, A, 0)
-print P    
+print timings    
