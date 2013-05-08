@@ -3,12 +3,13 @@ import numpy as np
 import scipy.sparse as csr
 import math
 from sklearn import random_projection
+from projections import *
 
 filename = "ap/ap.dat"
 numWords = 10473
 #lowerDimensions = log 40173 * 4 /(0.2*0.2)
 lowerDimensions = 500
-K= 10
+K= 4
 Hbar = []
 Hcap = [0]*numWords
 
@@ -44,6 +45,34 @@ Q.data /= row_sums[row_indices]
 transformer = random_projection.SparseRandomProjection(lowerDimensions)
 D = transformer.fit_transform(Q)
 
+maxindex = np.argmax((D.multiply(D)).sum(1))
+S = np.matrix(D[maxindex].todense())
+Sdash = [maxindex]
+
+for i in xrange(1,K):
+	projectionMatrix = calcOrthogonalProjectionMatrix(S.T)
+	maxValue = float("-inf")
+	for j in xrange(1,D.shape[0]):
+		orthogonalComponent= (projectionMatrix * D[j].T)
+		distance = np.sum(np.square(orthogonalComponent))
+		if maxValue < distance :
+			maxValue = distance
+			maxindex = j
+	print str(i)
+	S = np.vstack([S,D[maxindex].todense()])
+	Sdash.append(maxindex)
 
 
-	
+for i in xrange(1,K):
+	escapedS =  np.vstack( [S[0:i][:],S[i+1:K][:]])
+	projectionMatrix = calcOrthogonalProjectionMatrix(escapedS.T)
+	maxValue = float("-inf")
+	for j in xrange(1,D.shape[0]):
+		orthogonalComponent= (projectionMatrix * D[j].T)
+		distance = np.sum(np.square(orthogonalComponent))
+		if maxValue < distance :
+			maxValue = distance
+			maxindex = j
+	print str(i)
+	S = np.vstack([S[0:i][:],D[maxindex].todense(),S[i+1:K][:]])
+	Sdash = Sdash[0:i] + [maxindex] + Sdash[i+1:K]
