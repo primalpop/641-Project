@@ -68,8 +68,8 @@ def prim(V, A, r):
     return P
 
 #V = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-
-timings = []
+"""
+timings_vertices = []
 for i in range(5, 1000, 5):
     start = time.time()
     A = gen.topology(i,0.4)        
@@ -77,8 +77,24 @@ for i in range(5, 1000, 5):
     P = prim(V, A, 0)
     end = time.time()
     t = end - start
-    timings.append(t)
+    timings_vertices.append(t)
     print time
     #print P
+"""
+"""
+timings_threshold = []
+import numpy
+V = range(250)
+for nt in numpy.linspace(0.1, 0.95, 20):
+    start = time.time()
+    A = gen.topology(250,nt)        
+    P = prim(V, A, 0)
+    end = time.time()
+    t = end - start
+    timings_threshold.append(t)
+    print t
+    #print P
 
-print timings    
+print timings_threshold    
+
+"""
