@@ -4,6 +4,7 @@ import scipy.sparse as csr
 import math
 from sklearn import random_projection
 from projections import *
+import linecache
 
 filename = "ap/ap.dat"
 numWords = 10473
@@ -76,3 +77,6 @@ for i in xrange(1,K):
 	print str(i)
 	S = np.vstack([S[0:i][:],D[maxindex].todense(),S[i+1:K][:]])
 	Sdash = Sdash[0:i] + [maxindex] + Sdash[i+1:K]
+
+for i in Sdash:
+	print linecache.getline("ap/vocab.txt",i)
