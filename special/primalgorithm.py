@@ -28,7 +28,10 @@ def prim( nodes, edges ):
                     heappush( usable_edges, e )
     return mst
 
-A = gen.topology(1000, 0.4)        
+
+vertices = 1000
+
+A = gen.topology(vertices, 0.4)        
 N = [str(x) for x in list(xrange(len(A)))]
 
 p = []
@@ -38,9 +41,10 @@ for i in xrange(1,len(A)):
     if A[i][j] != 0:
       p.append((str(i),str(j),A[i][j]))
 
-print len(p)
+print "no of vertices, no of edges", len(p), vertices
 
 prim(N, p)
+
 #V = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 """
 timings_vertices = []

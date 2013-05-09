@@ -1,7 +1,6 @@
 import math
 import random
 import sys
-import primalgorithm
 
 """
 Generates a graph with N vertices and edge costs.
@@ -60,7 +59,7 @@ if __name__	== "__main__":
 	    timings_threshold.append(t)
 	    print t
 	    #print P
-	    
+
 	#print timings_threshold
 
 	#plotting the results		
