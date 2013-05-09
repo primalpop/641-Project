@@ -27,52 +27,45 @@ def prim( nodes, edges ):
                 if e[ 2 ] not in used:
                     heappush( usable_edges, e )
     return mst
-
-
-vertices = 1000
-
-A = gen.topology(vertices, 0.4)        
-N = [str(x) for x in list(xrange(len(A)))]
-
-p = []
-
-for i in xrange(1,len(A)):
-  for j in xrange(1,i):
-    if A[i][j] != 0:
-      p.append((str(i),str(j),A[i][j]))
-
-print "no of vertices, no of edges", len(p), vertices
-
-prim(N, p)
-
-#V = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 """
 timings_vertices = []
-for i in range(5, 1000, 5):
+theorotical = []
+for vertices in range(5, 1000, 5):
     start = time.time()
-    A = gen.topology(i,0.4)        
-    V = range(i)
-    P = prim(V, A, 0)
+    A = gen.topology(vertices, 0.4)        
+    N = [str(x) for x in list(xrange(len(A)))]
+    p = []
+
+    for i in xrange(1,len(A)):
+      for j in xrange(1,i):
+        if A[i][j] != 0:
+          p.append((str(i),str(j),A[i][j]))
+    prim(N, p)
     end = time.time()
     t = end - start
     timings_vertices.append(t)
-    print time
-    #print P
-"""
+    theorotical.append(vertices*vertices)
+    print t,len(p), vertices
+    
 """
 timings_threshold = []
+theorotical = []
 import numpy
-V = range(250)
+vertices = 50
 for nt in numpy.linspace(0.1, 0.95, 20):
     start = time.time()
-    A = gen.topology(250,nt)        
-    P = prim(V, A, 0)
+    A = gen.topology(vertices, nt)        
+    N = [str(x) for x in list(xrange(len(A)))]
+    p = []
+    for i in xrange(1,len(A)):
+      for j in xrange(1,i):
+        if A[i][j] != 0:
+          p.append((str(i),str(j),A[i][j]))
+    prim(N, p)
     end = time.time()
     t = end - start
+    start = time.time()
     timings_threshold.append(t)
-    print t
     #print P
 
-print timings_threshold    
-
-"""
+#print timings_threshold    
