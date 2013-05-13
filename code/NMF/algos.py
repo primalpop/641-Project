@@ -9,8 +9,8 @@ import linecache
 filename = "ap/ap.dat"
 numWords = 10473
 #lowerDimensions = log 40173 * 4 /(0.2*0.2)
-lowerDimensions = 500
-K= 4
+lowerDimensions = 1000
+K= 10
 Hbar = []
 Hcap = [0]*numWords
 
@@ -79,4 +79,4 @@ for i in xrange(1,K):
 	Sdash = Sdash[0:i] + [maxindex] + Sdash[i+1:K]
 
 for i in Sdash:
-	print linecache.getline("ap/vocab.txt",i)
+	print linecache.getline("ap/vocab.txt",i+1)
