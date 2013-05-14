@@ -216,6 +216,31 @@ Comparing the results obtained from LDA, anchor words much more accurately repre
 \subsection{Contributions}
 
 The size of this matrix is very large of order of square of size of dictionary. Even though matrix is sparse it will take a huge amount of space. We solve this problem using random projection of matrices.Random projection is based on Johnson-Lindenstrauss lemma which is explained in section below. We take random projection of word word co occurrence matrix and reduce its size considerably from $O((dictionary size)^2)$ to $O((dictionary size)*P)$. Our dictionary size was around 10473, so we reduced space taken by word word co variance matrix from $O((10473)^2)$ to $O((10473)*500)$.
+\\
+
+\subsection{Evaluation}
+
+From given AP dataset we evaluated our algorithm. Algorithm returned anchor words such as Buenoes, Edt, Chapman, Y, bcspehealth, cdy, cycle, nikkei and heres. Once we got all Anchor words from Algorithm, we checked ourselves to see the topics that these anchors are inclined to. After self-analysis of whole ap dataset, following is our observation based on each anchor word:
+
+\begin{enumerate}
+\item Buenos: this anchor word talks about Buenos Aires, a city in Argentina where various articles discussed about politics in this city. So topic as per our observation is Politics. 
+
+\item EDT: Topic in this case of Anchor word is Weather as various articles talked about weather updates at various times of the day. 
+
+\item Chapman: This was a confused Anchor word which didn't point to any specific topic as Chapman is used as name of people and places in Articles. 
+
+\item Y: This Anchor word points towards a person "Obando y Bravo" as there are couple of articles in dataset about this person. 
+
+\item Shevardnadze: This anchor word points to a politician Eduard Shevardnadze. Dataset consists of many articles covering Eduard Shevardnadze. Thus, topic for this word is Politics. 
+
+\item Cdy: This points towards weather as this anchor word is specific to few articles talking about weather in various cities. 
+
+\item Cycle: This is very interesting anchor and it points towards agriculture, election and annual cycles mentioned in various articles of a dataset. 
+
+\item Nikkei: It points towards Nikkei stock exchange. 
+
+\end{enumerate}
+
 
 \section{Future Work}
 
