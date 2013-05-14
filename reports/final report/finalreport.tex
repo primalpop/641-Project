@@ -90,8 +90,14 @@ The high level sketch of algorithm as proposed by \cite{tm} is given in \ref{fig
 \label{fig:algorithm}
 \end{figure}
 
-{\color{orange}
-Problems with alogrithm}
+The authors express doubt over whether matrix factorization version of this algorithm is indeed practical. So instead we followed a probabilistic approach for finding the topic model. Also word-word cooccurence matrix($10,000*10,000$) was too large to contain in memory. Therefore we used the following methods for dimensionality reduction.
+
+\begin{itemize}
+\item Principle Component Analysis
+\item Random Projection 
+\end{itemize} 
+
+We choose random projections over the first method as it was comparatively fast and efficient. It was also easier to customize based on the word-word cooccurence matrix we had.
 
 \section{Dataset}
 We have evaluated the results using the subset of Associated Press data set. This data set consists of documents which focus on different content areas and while still being rather small has similar characteristics as other corpora used in the topic models literature. The subset is from the Associated Press data from the First Text Retrieval Conference (TREC-1) and it is available on Blei's web page (http://www.cs.princeton.edu/~blei/lda-c). It consists of 2246 documents and the vocabulary was already selected to contain only words which occur in more than 5 documents. We also considered using New York Times dataset for evaluating our results but it was not freely and readily available.
@@ -128,8 +134,14 @@ We are implementing distance matrix algorithm to find out the similarity between
 
 
 \section{Results}
-We are currently experimenting and evaluating the results and will be able to publish the results in final report. This draft procudes a good image where we stand. \\
-{\color{orange} Anchor Words : \\
+
+\subsection{Comparison of LDA against Anchor Words}
+
+We experimented with Latent Dirchilet Allocation(LDA) and Generation of anchor words. The results are as follows. \\
+
+Anchor Words \\
+
+\begin{verbatim}
 buenos
 edt
 chapman
@@ -140,9 +152,11 @@ cdy
 cycle
 nikkei
 heres
-}
-{\color{orange}
-Latent Dirchlet Allocation
+\end{verbatim}
+
+Latent Dirchlet Allocation \\
+
+\begin{verbatim}
 topic 000
    percent
    million
@@ -193,7 +207,15 @@ topic 003
    new
    party
    house
-}
+\end{verbatim}
+
+We went over each anchor word and saw that all of them accurately and uniquely represents the topic of document they belong to. For example, the anchor word 'y' {\color{orange} Complete this }
+
+Comparing the results obtained from LDA, anchor words much more accurately represented the document collection. For instance, letters like 'i' was selected as a topic in multiple documents which doesn't point to any specific topic. We believe that these anchor words will help in recovery of better topics from the documents.
+
+\subsection{Contributions}
+
+The size of this matrix is very large of order of square of size of dictionary. Even though matrix is sparse it will take a huge amount of space. We solve this problem using random projection of matrices.Random projection is based on Johnson-Lindenstrauss lemma which is explained in section below. We take random projection of word word co occurrence matrix and reduce its size considerably from $O((dictionary size)^2)$ to $O((dictionary size)*P)$. Our dictionary size was around 10473, so we reduced space taken by word word co variance matrix from $O((10473)^2)$ to $O((10473)*500)$.
 
 \section{Future Work}
 
