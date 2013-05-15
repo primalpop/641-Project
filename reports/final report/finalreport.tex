@@ -27,11 +27,7 @@
 \begin{abstract}
 Understanding topics related to a document is an important problem. It has its applications in advertising, search engines,etc. \cite{tm} paper suggest that understanding topics about a document can be formulated as problem of non negative matrix factorization. It proves that this problem is NP hard and suggests the use of anchor words to simplify the problem. It suggests NMF as replacement of LDA algorithm by making a claim that using anchor words is less stronger assumption and this assumption holds in real life datasets. But, it doesn't give any empirical results proving these claims. We empirically evaluate these claims and check whether anchor words assumption hold on real life datasets. \\
 
-{\color{orange} 
-We 
-We in this paper practically implement the algorithm stated by \cite{tm} using probabilistic approach.We evaluate the "separability" assumption made by 
-Most document classification algorithms require us to calculate distance between two documents based on their similarity. We are using topic models to find semantic distance between two documents. We have also considered effect of anchor words on finding semantic distance and find if there is any improvement in accuracy distance. This paper evaluates empirically effect of different distance measures for finding document similarity using topic models and suggest which distance measure is best suited for this problem
-}
+We in this paper practically implement the algorithm stated by \cite{tm} using probabilistic approach.We evaluate the "separability" assumption made by authors of \cite{tm} on real life datasets like AP press dataset. We use novel approach of random projection to reduce dimensionality of word word co occurrence matrix. We also evaluate the time taken by our algorithm for different parameters like dimensions and number of anchor words. We also compare several other algorithm state assumptions made by each algorithm which includes well known algorithms like LDA(Latent Dirchlet allocation) and thus state the need of new algorithm using NMF.
 \end{abstract}
 
 \pagebreak
