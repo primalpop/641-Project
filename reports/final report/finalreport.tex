@@ -24,10 +24,13 @@
 
 
 \begin{abstract}
-Understanding topics related to a document is an important problem. It has its applications in advertising, search engines,etc. \cite{tm} paper suggest that understanding topics about a document can be formulated as problem of non negative matrix factorization. It proves that this problem is NP hard and suggests the use of anchor words to simplify the problem. It suggests NMF as replacement of LDA algorithm by making a claim that using anchor words is less stronger assumptions and this assumption holds in real life datasets. But, it doesn't give any empirical results proving these claims. We empirically evaluate these claims and check whether anchor words assumption hold on real life datasets. \\
+Understanding topics related to a document is an important problem. It has its applications in advertising, search engines,etc. \cite{tm} paper suggest that understanding topics about a document can be formulated as problem of non negative matrix factorization. It proves that this problem is NP hard and suggests the use of anchor words to simplify the problem. It suggests NMF as replacement of LDA algorithm by making a claim that using anchor words is less stronger assumption and this assumption holds in real life datasets. But, it doesn't give any empirical results proving these claims. We empirically evaluate these claims and check whether anchor words assumption hold on real life datasets. \\
 
+{\color{orange} 
+We 
+We in this paper practically implement the algorithm stated by \cite{tm} using probabilistic approach.We evaluate the "separability" assumption made by 
 Most document classification algorithms require us to calculate distance between two documents based on their similarity. We are using topic models to find semantic distance between two documents. We have also considered effect of anchor words on finding semantic distance and find if there is any improvement in accuracy distance. This paper evaluates empirically effect of different distance measures for finding document similarity using topic models and suggest which distance measure is best suited for this problem
-
+}
 \end{abstract}
 
 \pagebreak
@@ -39,9 +42,9 @@ Topic modeling is an unsupervised approach that learns thematic structure from d
 
 The other applications where we can use topic models is during searching. For example, topic models are ideal for searching on social media sites like quora. On quora there are large number of question and answer and it would be good if user could search through topics and find question and answers which are related to his topic of interest. Organizations like New York Times present another example where topic modeling can be very handy. NY Times has articles since 1851. It will be next to impossible to tag them as tagging was not that common before emergence of computer. Methods like topic modeling can help to mine and classify these large corpus of documents. Also, finding advertisements which are related to query that user just searched and is probably interested in is an interesting problem whose roots lie in topic models. So, topic models have their application in various fields like advertisement, searching, recommendation engine, etc. \\
 
-[1] Suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices. It also suggests use of anchor words to make this problem tractable. But, no empirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theoretically, suggest that NMF is better than LDA and it makes less severe assumption of separability. We are experimentally verifying this claim and check for severity of "separability" assumption on real life dataset. We are also comparing two documents based on their distribution over topic models. For this comparison, we can try different distance measures and understand which distance measure works best with topic models. This problem is significant because, understanding distance measures can be helpful in all types of machine learning problems like clustering, classification etc. It will also be useful in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]. \\
+[1] Suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices. It also suggests use of anchor words to make this problem tractable. But, no empirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theoretically, suggest that NMF is better than LDA and it makes less severe assumption of separability. We are experimentally verifying this claim and check for severity of "separability" assumption on real life dataset. We are also comparing two documents based on their distribution over topic models.This problem is significant because, understanding distance measures can be helpful in all types of machine learning problems like clustering, classification etc. It will also be useful in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]. \\
 
-In this paper, we have experimented and verified the approaches that are theoretically mentioned in the paper. In following section, we have mentioned some of the previous and algorithms that are used to evaluate topic models. There are many different approaches but we have mentioned some of most prominent ones. After that you will see detailed discussion about our methods that we are using along with results from implementing these methods. \\
+In this paper, we have experimented and verified the approaches that are theoretically mentioned in the paper. In following section, we have mentioned some of the previous algorithms that are used to evaluate topic models. There are many different approaches but we have mentioned some of most prominent ones. After that you will see detailed discussion about our methods and results we get after implementing these methods. \\
 
 \section{Previous Work}
 
@@ -52,7 +55,7 @@ Sampling-based algorithms and variation algorithms are the two classes of topic 
 A similar approach is used by Anandkumar et al\cite{anand12}. which does not require not require separability assumptions and like LDA assumes that topics are not correlated. These models therefore fail in capturing correlations between topics. Pachinko Allocation Model(PAM) captures the concepts of topics as distribution over words as well as the correlation between topics but the topics and their relations have to be manually selected\cite{pam}.
 
 \subsection{Evaluating different models}
-We analyzed these different models and identified their advantages as well as disadvantages. Following table shows some short comings of the other models which are generally studied in topic modeling problem.
+We analysed these different models and identified assumptions made by certain topic model and problems in certain model. Table 1 shows comparison of several topic models and some short comings of other models which are generally studied in topic modelling problem.
 
 
 \begin{table}
@@ -63,9 +66,10 @@ We analyzed these different models and identified their advantages as well as di
     Problem with LDA model assumption is that topics do not have co-relation between them. & Recover span of topic vectors and this model is followed by PAM and CTM. & Gibb's Sampling is a slow model because of using sequence modeling approach. \\ \hline
     \end{tabular}
     \caption {Short comings of various other models}
+    \label{table:comparison}
 \end{table}
 
-As you can see there are various assumptions on which these models are based on and these assumptions result in bad performance for the problem of topic modeling.
+As you can see there are various assumptions on which these models are based on and these assumptions result in bad performance for the problem of topic modelling in some cases. NMF uses much less severe assumptions than other models called separability assumption. We in this paper evaluate this assumption.
 
 
 \section{Topic Modelling using NMF}
@@ -113,7 +117,7 @@ We have evaluated the results using the subset of Associated Press data set. Thi
 \section{Methods}
 In this project, we tried to implemented the work proposed by the authors in their paper \cite{tm}. This concept of anchor words, words that helps to decide the topic of a document, is quite promising. Though it comes with different inherent problems such as it is not easy to find anchor words for every document and sometimes having more documents make it more complex to find anchor words as it might overlap with other documents as well. Despite all this, Anchor words helps to differentiate one document from other contextually. 
 
-Also the authors express doubt over whether matrix factorization version of this algorithm is indeed practical. So instead we followed a probabilistic approach for finding the topic model. Also word-word cooccurence matrix($10,000*10,000$) was too large to contain in memory. Therefore we used the following methods for dimensionality reduction.
+Also the authors express doubt over whether matrix factorization version of this algorithm is indeed practical. So instead we followed a probabilistic approach for finding the topic model. One of reason the algorithm stated by \cite{tm} is impractical is because word-word co-occurrence matrix($10,000*10,000$) was too large to contain in memory. Therefore we used the following methods for dimensionality reduction.
 
 \begin{itemize}
 \item Principle Component Analysis
@@ -171,6 +175,8 @@ From given AP dataset we evaluated our algorithm. Algorithm returned anchor word
 \item Nikkei: It points towards Nikkei stock exchange. 
 
 \end{enumerate}
+
+So, we do think that our algorithm did very good job for finding anchor words except for word "chapman". We believe the reason of "chapman" is not the best anchor word as it can be used in several different ways.
 
 \subsection{Topics generated by LDA}
 We also generated topics using Latent Dirchlet Allocation program implemented by David Blei and which is available on his website.\footnote{\url{http://www.cs.princeton.edu/~blei/lda-c}}. Following table shows the topics returned by LDA algorithm.  \\
