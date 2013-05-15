@@ -79,3 +79,6 @@ def NMFTopicmodelling(K):
 
 	for i in Sdash:
 		print linecache.getline("ap/vocab.txt",i+1)
+
+for i in xrange(1,10):
+	NMFTopicmodelling(i)
