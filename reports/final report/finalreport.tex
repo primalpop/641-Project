@@ -127,20 +127,14 @@ The algorithm we have implemented is based on a probabilistic approach where we 
 
 From given AP dataset we evaluated our algorithm. Algorithm returned anchor words such as Buenoes, Edt, Chapman, Y, bcspehealth, cdy, cycle, nikkei and heres We take random projection of word word co occurrence matrix and reduce its size considerably from $O((dictionary size)^2)$ to $O((dictionary size)*P)$. Our dictionary size was around 10473, so we reduced space taken by word word co variance matrix from $O((10473)^2)$ to $O((10473)*500)$. This was used to get all anchor words from the algorithm, we checked ourselves to see the topics that these anchors are inclined to. After self-analysis of whole AP dataset, following is our observation based on each anchor word:
 
-Anchor Words {\color{orange} change to table}
+\begin{table}
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+    \hline
+    buenos & edt & chapman & y & shevardnadze & bcspehealth & cdy & cycle & nikkei & heres \\ \hline
+    \end{tabular}
+    \caption {Anchor Words generated using NMF algorithm}
+\end{table}
 
-\begin{verbatim}
-buenos
-edt
-chapman
-y
-shevardnadze
-bcspehealth
-cdy
-cycle
-nikkei
-heres
-\end{verbatim}
 
 \begin{enumerate}
 \item Buenos: this anchor word talks about Buenos Aires, a city in Argentina where various articles discussed about politics in this city. So topic as per our observation is Politics. 
@@ -165,59 +159,16 @@ heres
 We also generated topics using Latent Dirchlet Allocation program implemented by David Blei and which is available on his website.  \\
 
 
-{\color{orange} change to table}
-\begin{verbatim}
-topic 000
-   percent
-   million
-   year
-   billion
-   new
-   market
-   company
-   prices
-   stock
-   last
-
-
-topic 001
-   i
-   years
-   new
-   court
-   people
-   two
-   state
-   time
-   case
-   year
-
-
-topic 002
-   police
-   people
-   two
-   government
-   officials
-   killed
-   military
-   three
-   miles
-   today
-
-
-topic 003
-   bush
-   president
-   soviet
-   government
-   states
-   united
-   i
-   new
-   party
-   house
-\end{verbatim}
+\begin{table}
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+    \hline
+    percent & million   & year   & billion    & new       & market & company  & prices & stock & last  \\ \hline
+    i       & years     & new    & court      & people    & two    & state    & time   & case  & year  \\ \hline
+    police  & people    & two    & government & officials & killed & military & three  & miles & today \\ \hline
+    bush    & president & soviet & government & states    & united & i        & new    & party & house \\ \hline
+    \end{tabular}
+    \caption {Latent Dirchlet Allocation Generated topics}
+\end{table}
 
 Comparing the results obtained from LDA, anchor words much more accurately represented the document collection. For instance, letters like 'i' was selected as a topic in multiple documents which doesn't point to any specific topic. We believe that these anchor words will help in recovery of better topics from the documents.
 
