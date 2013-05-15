@@ -39,7 +39,7 @@ Topic modeling is an unsupervised approach that learns thematic structure from d
 
 The other applications where we can use topic models is during searching. For example, topic models are ideal for searching on social media sites like quora. On quora there are large number of question and answer and it would be good if user could search through topics and find question and answers which are related to his topic of interest. Organizations like New York Times present another example where topic modeling can be very handy. NY Times has articles since 1851. It will be next to impossible to tag them as tagging was not that common before emergence of computer. Methods like topic modeling can help to mine and classify these large corpus of documents. Also, finding advertisements which are related to query that user just searched and is probably interested in is an interesting problem whose roots lie in topic models. So, topic models have their application in various fields like advertisement, searching, recommendation engine, etc. \\
 
-[1] Suggests that problem of topic modelling can be formulated as problem of factorization of matrix into non-negative matrices. It also suggests use of anchor words to make this problem tractable. But, no empirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theoretically, suggest that NMF is better than LDA and it makes less severe assumption of separability. We are experimentally verifying this claim and check for severity of "separability" assumption on real life dataset. We are also comparing two documents based on their distribution over topic models.This problem is significant because, understanding distance measures can be helpful in all types of machine learning problems like clustering, classification etc. It will also be useful in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]. \\
+[1] Suggests that problem of topic modeling can be formulated as problem of factorization of matrix into non-negative matrices. It also suggests use of anchor words to make this problem tractable. But, no empirical results of NMF and LDA which is another method of solving problem of topic models is given. Although they theoretically, suggest that NMF is better than LDA and it makes less severe assumption of separability. We are experimentally verifying this claim and check for severity of "separability" assumption on real life dataset. We are also comparing two documents based on their distribution over topic models.This problem is significant because, understanding distance measures can be helpful in all types of machine learning problems like clustering, classification etc. It will also be useful in understanding changes in document stream over time. Understanding these changes can be important for machine learning algorithms which work on this data as stated in [2]. \\
 
 In this paper, we have experimented and verified the approaches that are theoretically mentioned in the paper. In following section, we have mentioned some of the previous algorithms that are used to evaluate topic models. There are many different approaches but we have mentioned some of most prominent ones. After that you will see detailed discussion about our methods and results we get after implementing these methods. \\
 
@@ -52,7 +52,7 @@ Sampling-based algorithms and variation algorithms are the two classes of topic 
 A similar approach is used by Anandkumar et al\cite{anand12}. which does not require not require separability assumptions and like LDA assumes that topics are not correlated. These models therefore fail in capturing correlations between topics. Pachinko Allocation Model(PAM) captures the concepts of topics as distribution over words as well as the correlation between topics but the topics and their relations have to be manually selected\cite{pam}.
 
 \subsection{Evaluating different models}
-We analysed these different models and identified assumptions made by certain topic model and problems in certain model. Table 1 shows comparison of several topic models and some short comings of other models which are generally studied in topic modelling problem.
+We analysed these different models and identified assumptions made by certain topic model and problems in certain model. Table 1 shows comparison of several topic models and some short comings of other models which are generally studied in topic modeling problem.
 
 
 \begin{table}
@@ -66,11 +66,11 @@ We analysed these different models and identified assumptions made by certain to
     \label{table:comparison}
 \end{table}
 
-As you can see there are various assumptions on which these models are based on and these assumptions result in bad performance for the problem of topic modelling in some cases. NMF uses much less severe assumptions than other models called separability assumption. We in this paper evaluate this assumption.
+As you can see there are various assumptions on which these models are based on and these assumptions result in bad performance for the problem of topic modeling in some cases. NMF uses much less severe assumptions than other models called separability assumption. We in this paper evaluate this assumption.
 
 
-\section{Topic Modelling using NMF}
-Arora et al. \cite{tm} introduces the topic modelling as a non negative matrix factorization problem. The paper assumes that documents are distribution over words denoted by $M$. The goal of topic modelling is to recover the non-negative factors of $M$, $A$ and $W$ where $A$ is the topic distribution over documents and W is the document distribution over topics. $M$ is generated by product of these two matrices.\\
+\section{Topic Modeling using NMF}
+Arora et al. \cite{tm} introduces the topic modeling as a non negative matrix factorization problem. The paper assumes that documents are distribution over words denoted by $M$. The goal of topic modeling is to recover the non-negative factors of $M$, $A$ and $W$ where $A$ is the topic distribution over documents and W is the document distribution over topics. $M$ is generated by product of these two matrices.\\
 
 The Arora et al. \cite{tm} algorithm has two steps
 
@@ -205,7 +205,7 @@ Following graph \ref{fig:anchor_words} proves that time taken linearly increase 
 \subsection{Effects of dimension reduction on time taken by NMF}
 
 
-Following graph \ref{fig:dimension} shows that time taken by algorithm increases with increase of no of dimension exponentially but anchor words generated by NMF algorithm do not defer much for different dimensions as shown in above given table table. 
+Graph \ref{fig:dimension} shows that time taken by algorithm increases with increase of no of dimension exponentially but anchor words generated by NMF algorithm do not defer much for different dimensions as shown in above given table. 
 
 
 \begin{table}
@@ -231,7 +231,7 @@ buenos & edt & shevardnadze & 900  \\ \hline
 \begin{figure}[htb]
 \centering
 \includegraphics[scale=1.0]{dimension.jpg}
-\caption{Effects of Dimension on time}
+\caption{Effects of dimension of random projection on time}
 \label{fig:dimension}
 \end{figure}
 
@@ -240,13 +240,16 @@ buenos & edt & shevardnadze & 900  \\ \hline
 
 \begin{itemize}
 
-\item Generating Variable-Length topics modelling using sequitur algorithm:
-	One problem with existing approaches for topic modelling is that it is assumed that one word can define one topic. But this might not necessarily be the case. Finding topics of variable word length might describe a document in better way. One approach for doing this is applying topic modeling over rules generated by algorithms like sequitur rather than applying rules over words.
+\item Generating Variable-Length topics modeling using sequitur algorithm:
+	One problem with existing approaches for topic modeling is that it is assumed that one word can define one topic. But this might not necessarily be the case. Finding topics of variable word length might describe a document in better way. One approach for doing this is applying topic modeling over rules generated by algorithms like sequitur rather than applying rules over words.
 
-\item Recommendar systems using topic modelling:
+\item Recommendar systems using topic modeling:
 	LDA assumes that priors that have the form of the Dirichlet distribution. LDA can applied to predict review scores based on the content of reviews and to uncover implicit community structures in a social network. It can be also extended to include general meta-data of users and objects.
 
 \end{itemize}
+
+\section{Conclusion}
+In this project, we compared and analyzed several topic models and implemented theoretical NMF algorithm. We reduced the complexity of algorithm by reducing the dimension using random projection. We share our results and findings in this paper. 
 
 
 \begin{thebibliography}{99}
