@@ -71,7 +71,7 @@ If $\hat{M}$  is approximation of product of $A$ and $W$, then $\hat{M} \hat{M}^
 For calculation of matrices A and W, Arora et al. \cite{tm} makes separability assumption. It assumes existence of anchor words which are highly suggestive of topics which means that anchor words occur with very high probability in one topic and with negligible probability in others. As mentioned earlier $\hat{M} \hat{M}^T$ approximates $M M^T $ and this can be used to recover the anchor words. It can be seen that in $M$ each row of $W$ appears scaled by the anchor words present in $A$. \\
 
 
-%add figure of A W product and M: Slide no 8
+{\color{orange} Ravendar add figure of A W product and M: Slide no 8}
 
 Anchor words are the extreme points in word word co-occurrence matrix and all other words are convex combination of anchor words. So, anchor words form convex hull over all words as shown in \ref{fig:convexhull}. If we remove any word other than anchor word, convex hull does not change, but if we remove anchor word convex hull changes. Arora et al. \cite{tm} algorithm is based on this property of anchor words. \\
 
@@ -90,20 +90,20 @@ The high level sketch of algorithm as proposed by \cite{tm} is given in \ref{fig
 \label{fig:algorithm}
 \end{figure}
 
-The authors express doubt over whether matrix factorization version of this algorithm is indeed practical. So instead we followed a probabilistic approach for finding the topic model. Also word-word cooccurence matrix($10,000*10,000$) was too large to contain in memory. Therefore we used the following methods for dimensionality reduction.
+\section{Dataset}
+We have evaluated the results using the subset of Associated Press data set. This data set consists of documents which focus on different content areas and while still being rather small has similar characteristics as other corpora used in the topic models literature. The subset is from the Associated Press data from the First Text Retrieval Conference (TREC-1) and it is available on Blei's web page (http://www.cs.princeton.edu/~blei/lda-c). It consists of 2246 documents and the vocabulary was already selected to contain only words which occur in more than 5 documents. We also considered using New York Times dataset for evaluating our results but it was not freely and readily available.
+
+\section{Methods}
+We have mainly focused on the approaches mentioned in paper [1] and tried to implement what they have mentioned. This concept of anchor words, words that helps to decide the topic of a document, is very promising. Though it comes with different inherant problems like it is not easy to find anchor words for every document and sometimes having more documents make it more complex to find anchor words as it might overlap with other documents as well. Despite all this, Anchor words helps to differentiate one document from other contextually. 
+
+Also the authors express doubt over whether matrix factorization version of this algorithm is indeed practical. So instead we followed a probabilistic approach for finding the topic model. Also word-word cooccurence matrix($10,000*10,000$) was too large to contain in memory. Therefore we used the following methods for dimensionality reduction.
 
 \begin{itemize}
 \item Principle Component Analysis
 \item Random Projection 
 \end{itemize} 
 
-We choose random projections over the first method as it was comparatively fast and efficient. It was also easier to customize based on the word-word cooccurence matrix we had.
-
-\section{Dataset}
-We have evaluated the results using the subset of Associated Press data set. This data set consists of documents which focus on different content areas and while still being rather small has similar characteristics as other corpora used in the topic models literature. The subset is from the Associated Press data from the First Text Retrieval Conference (TREC-1) and it is available on Blei's web page (http://www.cs.princeton.edu/~blei/lda-c). It consists of 2246 documents and the vocabulary was already selected to contain only words which occur in more than 5 documents. We also considered using New York Times dataset for evaluating our results but it was not freely and readily available.
-
-\section{Methods}
-We evaluated number of approaches to find the distance similarity between two documents. We have mainly focused on the approaches mentioned in paper [1] and tried to implement what they have mentioned. This concept of anchor words, words that helps to decide the topic of a document, is very promising. Though it comes with different inherit problems like it is not easy to find anchor words for every document and sometimes having more documents make it more complex to find anchor words as it might overlap with other documents as well. Despite all this, Anchor words helps to differentiate one document from other contextually. In following methods we will see how to find anchor words along and how to use them to find the similarity among documents. \\
+We choose random projections over the first method as it was comparatively fast and efficient. It was also easier to customize based on the word-word cooccurence matrix we had. In following subsections the method used for find anchor words and how to use them to recover topics of the documents has been explained. \\
 
 \subsection{Calculating word word co occurrence matrix}
 We calculate Word Word covariance matrix as we get very noisy version of data and this matrix has property that  $\hat{M} \hat{M}^T -> M M^T $ and $W W^T -> R$ as number of documents increases. For computation of this matrix we counted number of times each word appears in certain document and formed a document word matrix. We represented this matrix $\bar{Hd}$ as sparse as it had very few number of non zero entries. We normalised all the entries by dividing each count by sqrt(n*n-1) where n is total number of words in that document. We also computed $\hat{H}$ which is diagonal matrix which contains elements total count divided by (n*n-1). Then word word covariance matrix Q is given by equation (1).
@@ -111,35 +111,23 @@ We calculate Word Word covariance matrix as we get very noisy version of data an
 \begin{equation}
 Q = \bar{H} \bar{H}^T - \hat{H}
 \end{equation}
-The size of this matrix is very large of order of square of size of dictionary. Even though matrix is sparse it will take a huge amount of space. We solve this problem using random projection of matrices.Random projection is based on Johnson-Lindenstrauss lemma which is explained in section below. We take random projection of word word co occurrence matrix and reduce its size considerably from $O((dictionary size)^2)$ to $O((dictionary size)*P)$. Our dictionary size was around 10473, so we reduced space taken by word word co variance matrix from $O((10473)^2)$ to $O((10473)*500)$. {\color{orange} Add this thing in results as well}
+The size of this matrix is very large of order of square of size of dictionary. Even though matrix is sparse it will take a huge amount of space. We solve this problem using random projection of matrices.Random projection is based on Johnson-Lindenstrauss lemma which is explained in section below. We take random projection of word word co occurrence matrix and reduce its size considerably from $O((dictionary size)^2)$ to $O((dictionary size)*P)$. Our dictionary size was around 10473, so we reduced space taken by word word co variance matrix from $O((10473)^2)$ to $O((10473)*500)$.
+
 \subsubsection{Johnson-Lindenstrauss lemma}
 Random projection is based on Johnson-Lindenstrauss lemma which is "If points in a vector space are projected onto a randomly selected subspace of suitably high dimension, then the distances between the points are approximately preserved." as stated in \cite{randomProjection} Random projection reduces size of matrix considerably by projecting it to lower dimension, but keeps the distances between two points approximately same as it was in higher dimension.
 
 
 \subsection{Recovering Word Topic Matrix}
-The algorithm we have implemented is based on a probabilistic approach where we find the conditional probabilities of words given topics using Bayes theorem. For this purpose we use the row-normalized word co-occurrence matrix $\bar{Q}$ which gives the conditional probability among pairs of words. So given $\hat{Q_{i}}$, which is a row of the empirical row normalized co-occurrence matrix we wish to find out the $p(\frac{z_{1}}{w_{1}=i}$ which can best recover the rows as a convex combination of the anchor words. This step can be done in parallel using exponentiated gradient algorithm. The word topic matrix can be recovered once we have $p(\frac{z_{1}}{w_{1}}$ using Bayes rule. 
-
-\subsection{Document Similarity Using Topic Models}
-We are implementing distance matrix algorithm to find out the similarity between two documents. This distance basically tells us how similar or dissimilar two documents are. We are using our topic model algorithm in this. Basically, after getting the scores of all the topics in each of the documents, We evaluate the euclidean distance between two topics in each of these two document. And the Highest score among topics will tell which topic best describes the relationship among two documents. We have not fully implemented this yet but we are in good position to complete this very soon and add the results in final report. Figure 1 demonstrate one example where two different documents in sports category are considered for topics Football, Baseball and Basketball. 
-
-
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=180mm]{document_similarity.jpg}
-\caption{Document Similarity using topic model}
-\label{overflow}
-\end{figure}
-
+The algorithm we have implemented is based on a probabilistic approach where we find the conditional probabilities of words given topics using Bayes theorem. For this purpose we use the row-normalized word co-occurrence matrix $\bar{Q}$ which gives the conditional probability among pairs of words. So given $\hat{Q_{i}}$, which is a row of the empirical row normalized co-occurrence matrix we wish to find out the $p(z_{1}/w_{1})=i$ which can best recover the rows as a convex combination of the anchor words. This step can be done in parallel using exponentiated gradient algorithm. The word topic matrix can be recovered once we have $p(z_{1}/w_{1})$ using Bayes rule. 
 
 
 \section{Results}
 
-\subsection{Comparison of LDA against Anchor Words}
+\subsection{Verifying Separability Assumptions}
 
-We experimented with Latent Dirchilet Allocation(LDA) and Generation of anchor words. The results are as follows. \\
+From given AP dataset we evaluated our algorithm. Algorithm returned anchor words such as Buenoes, Edt, Chapman, Y, bcspehealth, cdy, cycle, nikkei and heres We take random projection of word word co occurrence matrix and reduce its size considerably from $O((dictionary size)^2)$ to $O((dictionary size)*P)$. Our dictionary size was around 10473, so we reduced space taken by word word co variance matrix from $O((10473)^2)$ to $O((10473)*500)$. This was used to get all anchor words from the algorithm, we checked ourselves to see the topics that these anchors are inclined to. After self-analysis of whole AP dataset, following is our observation based on each anchor word:
 
-Anchor Words \\
+Anchor Words {\color{orange} change to table}
 
 \begin{verbatim}
 buenos
@@ -154,8 +142,30 @@ nikkei
 heres
 \end{verbatim}
 
-Latent Dirchlet Allocation \\
+\begin{enumerate}
+\item Buenos: this anchor word talks about Buenos Aires, a city in Argentina where various articles discussed about politics in this city. So topic as per our observation is Politics. 
 
+\item EDT: Topic in this case of Anchor word is Weather as various articles talked about weather updates at various times of the day. 
+
+\item Chapman: This was a confused Anchor word which didn't point to any specific topic as Chapman is used as name of people and places in Articles. 
+
+\item Y: This Anchor word points towards a person "Obando y Bravo" as there are couple of articles in dataset about this person. 
+
+\item Shevardnadze: This anchor word points to a politician Eduard Shevardnadze. Dataset consists of many articles covering Eduard Shevardnadze. Thus, topic for this word is Politics. 
+
+\item Cdy: This points towards weather as this anchor word is specific to few articles talking about weather in various cities. 
+
+\item Cycle: This is very interesting anchor and it points towards agriculture, election and annual cycles mentioned in various articles of a dataset. 
+
+\item Nikkei: It points towards Nikkei stock exchange. 
+
+\end{enumerate}
+
+
+We also generated topics using Latent Dirchlet Allocation program implemented by David Blei and which is available on his website.  \\
+
+
+{\color{orange} change to table}
 \begin{verbatim}
 topic 000
    percent
@@ -209,37 +219,7 @@ topic 003
    house
 \end{verbatim}
 
-We went over each anchor word and saw that all of them accurately and uniquely represents the topic of document they belong to. For example, the anchor word 'y' {\color{orange} Complete this }
-
 Comparing the results obtained from LDA, anchor words much more accurately represented the document collection. For instance, letters like 'i' was selected as a topic in multiple documents which doesn't point to any specific topic. We believe that these anchor words will help in recovery of better topics from the documents.
-
-\subsection{Contributions}
-
-The size of this matrix is very large of order of square of size of dictionary. Even though matrix is sparse it will take a huge amount of space. We solve this problem using random projection of matrices.Random projection is based on Johnson-Lindenstrauss lemma which is explained in section below. We take random projection of word word co occurrence matrix and reduce its size considerably from $O((dictionary size)^2)$ to $O((dictionary size)*P)$. Our dictionary size was around 10473, so we reduced space taken by word word co variance matrix from $O((10473)^2)$ to $O((10473)*500)$.
-\\
-
-\subsection{Evaluation}
-
-From given AP dataset we evaluated our algorithm. Algorithm returned anchor words such as Buenoes, Edt, Chapman, Y, bcspehealth, cdy, cycle, nikkei and heres. Once we got all Anchor words from Algorithm, we checked ourselves to see the topics that these anchors are inclined to. After self-analysis of whole ap dataset, following is our observation based on each anchor word:
-
-\begin{enumerate}
-\item Buenos: this anchor word talks about Buenos Aires, a city in Argentina where various articles discussed about politics in this city. So topic as per our observation is Politics. 
-
-\item EDT: Topic in this case of Anchor word is Weather as various articles talked about weather updates at various times of the day. 
-
-\item Chapman: This was a confused Anchor word which didn't point to any specific topic as Chapman is used as name of people and places in Articles. 
-
-\item Y: This Anchor word points towards a person "Obando y Bravo" as there are couple of articles in dataset about this person. 
-
-\item Shevardnadze: This anchor word points to a politician Eduard Shevardnadze. Dataset consists of many articles covering Eduard Shevardnadze. Thus, topic for this word is Politics. 
-
-\item Cdy: This points towards weather as this anchor word is specific to few articles talking about weather in various cities. 
-
-\item Cycle: This is very interesting anchor and it points towards agriculture, election and annual cycles mentioned in various articles of a dataset. 
-
-\item Nikkei: It points towards Nikkei stock exchange. 
-
-\end{enumerate}
 
 
 \section{Future Work}
