@@ -5,11 +5,12 @@ import math
 from sklearn import random_projection
 from projections import *
 import linecache
-def NMFTopicmodelling(K):
+import time
+
+def NMFTopicmodelling(K,lowerDimensions):
 	filename = "ap/ap.dat"
 	numWords = 10473
 	#lowerDimensions = log 40173 * 4 /(0.2*0.2)
-	lowerDimensions = 500
 	Hbar = []
 	Hcap = [0]*numWords
 
@@ -80,5 +81,10 @@ def NMFTopicmodelling(K):
 	for i in Sdash:
 		print linecache.getline("ap/vocab.txt",i+1)
 
-for i in xrange(1,10):
-	NMFTopicmodelling(i)
+
+for i in xrange(100,1000,100):
+	start = time.time()
+	NMFTopicmodelling(3,i)
+	end = time.time()
+	t = end - start
+	print t
